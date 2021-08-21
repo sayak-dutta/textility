@@ -51,7 +51,7 @@ export default function TextForm(props) {
           id="myBox"
           style={{
             backgroundColor: props.mode === "dark" ? "#222831" : "white",
-            color: props.mode === "dark" ? "white" : "dark",
+            color: props.mode === "dark" ? "white" : "black",
           }}
         />
         <button onClick={handleUpClick} className="btn btn-primary m-1">
