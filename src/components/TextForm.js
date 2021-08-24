@@ -20,6 +20,11 @@ export default function TextForm(props) {
     let newText = "";
     setText(newText);
   };
+  const copyText = () => {
+    let inputText = document.getElementById("myBox");
+    inputText.select();
+    navigator.clipboard.writeText(inputText.value);
+  };
 
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -62,6 +67,9 @@ export default function TextForm(props) {
         </button>
         <button onClick={handleTiClick} className="btn btn-primary m-1">
           Convert to Title Case
+        </button>
+        <button onClick={copyText} className="btn btn-info m-1">
+          Copy Text
         </button>
         <button onClick={clearText} className="btn btn-danger m-1">
           Clear Text
