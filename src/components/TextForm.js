@@ -4,10 +4,12 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.sendAlert("Text has been converted to Uppercase", "success");
   };
   const handleLoClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.sendAlert("Text has been converted lowercase", "success");
   };
   const handleTiClick = () => {
     let newText = text
@@ -15,15 +17,18 @@ export default function TextForm(props) {
       .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
       .join(" ");
     setText(newText);
+    props.sendAlert("First letter of each word has been converted Uppercase", "success");
   };
   const clearText = () => {
     let newText = "";
     setText(newText);
+    props.sendAlert("All text has been cleared", "danger");
   };
   const copyText = () => {
     let inputText = document.getElementById("myBox");
     inputText.select();
     navigator.clipboard.writeText(inputText.value);
+    props.sendAlert("Text has been copied to Clipboard", "info");
   };
 
   const handleOnChange = (event) => {
@@ -42,6 +47,7 @@ export default function TextForm(props) {
     element.download = "file.txt";
     document.body.appendChild(element);
     element.click();
+    props.sendAlert("Download Started", "success");
   };
 
   return (
@@ -53,6 +59,7 @@ export default function TextForm(props) {
           onChange={handleOnChange}
           className="form-control m-1"
           rows="7"
+          spellcheck="true"
           id="myBox"
           style={{
             backgroundColor: props.mode === "dark" ? "#222831" : "white",
@@ -84,7 +91,13 @@ export default function TextForm(props) {
         <p>
           {text.split(" ").length} Words and {text.length} Characters.
         </p>
-        <p>{0.008 * text.split(" ").length} Minutes read.</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          Minutes read.
+        </p>
         <h2>Preview</h2>
         <p>{text.length < 1 ? "Enter some text in the textbox to Preview" : text}</p>
       </div>

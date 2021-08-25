@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function About() {
+function About() {
   return (
     <div className="px-4 py-5 my-5 text-center">
       <img
@@ -38,3 +38,5 @@ export default function About() {
     </div>
   );
 }
+
+export default About;
