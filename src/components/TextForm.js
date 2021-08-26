@@ -28,6 +28,7 @@ export default function TextForm(props) {
     let inputText = document.getElementById("myBox");
     inputText.select();
     navigator.clipboard.writeText(inputText.value);
+    document.getSelection().removeAllRanges();
     props.sendAlert("Text has been copied to Clipboard", "info");
   };
 
@@ -53,7 +54,7 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container mb-3">
-        <h1 className="m-3">Type the here text to analyse</h1>
+        <h1 className="my-3">Type the here text to analyze</h1>
         <textarea
           value={text}
           onChange={handleOnChange}
@@ -66,22 +67,38 @@ export default function TextForm(props) {
             color: props.mode === "dark" ? "white" : "black",
           }}
         />
-        <button onClick={handleUpClick} className="btn btn-primary m-1">
+        <button
+          disabled={text.length === 0}
+          onClick={handleUpClick}
+          className="btn btn-primary m-1"
+        >
           Convert to Uppercase
         </button>
-        <button onClick={handleLoClick} className="btn btn-primary m-1">
+        <button
+          disabled={text.length === 0}
+          onClick={handleLoClick}
+          className="btn btn-primary m-1"
+        >
           Convert to Lowercase
         </button>
-        <button onClick={handleTiClick} className="btn btn-primary m-1">
+        <button
+          disabled={text.length === 0}
+          onClick={handleTiClick}
+          className="btn btn-primary m-1"
+        >
           Convert to Title Case
         </button>
-        <button onClick={copyText} className="btn btn-info m-1">
+        <button disabled={text.length === 0} onClick={copyText} className="btn btn-info m-1">
           Copy Text
         </button>
-        <button onClick={clearText} className="btn btn-danger m-1">
+        <button disabled={text.length === 0} onClick={clearText} className="btn btn-danger m-1">
           Clear Text
         </button>
-        <button onClick={downloadTxtFile} className="btn btn-success m-1">
+        <button
+          disabled={text.length === 0}
+          onClick={downloadTxtFile}
+          className="btn btn-success m-1"
+        >
           Download Text File
         </button>
       </div>
@@ -89,7 +106,12 @@ export default function TextForm(props) {
       <div className="container">
         <h2>Your Text Summary</h2>
         <p>
-          {text.split(" ").length} Words and {text.length} Characters.
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          Words and {text.length} Characters.
         </p>
         <p>
           {0.008 *

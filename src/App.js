@@ -18,7 +18,7 @@ function App() {
     });
     setTimeout(() => {
       setAlert(null);
-    }, 1500);
+    }, 1300);
   };
 
   const toggleMode = () => {
@@ -26,12 +26,12 @@ function App() {
       setMode("dark");
       document.body.style.backgroundColor = "#222831";
       document.body.style.color = "white";
-      sendAlert("Dark Mode has been turned On", "success");
+      sendAlert("Dark mode has been enabled", "success");
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
       document.body.style.color = "black";
-      sendAlert("Light Mode has been turned On", "success");
+      sendAlert("Light mode has been enabled", "success");
     }
   };
 
