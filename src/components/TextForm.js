@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { OpenAIApi, Configuration } from "openai";
+import configData from "../config.json";
 
 export default function TextForm(props) {
 	const configuration = new Configuration({
-		apiKey: "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",
+		apiKey: configData.OPENAI_API_KEY,
 	});
 	const openai = new OpenAIApi(configuration);
 	const [userText, setText] = useState("");
